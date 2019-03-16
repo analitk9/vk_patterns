@@ -1,0 +1,73 @@
+PODS:
+  - Alamofire (4.8.1)
+  - Firebase/CoreOnly (5.18.0):
+    - FirebaseCore (= 5.3.1)
+  - Firebase/Database (5.18.0):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (= 5.1.0)
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (5.3.1):
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseDatabase (5.1.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - leveldb-library (~> 1.18)
+  - GoogleUtilities/Environment (5.5.0)
+  - GoogleUtilities/Logger (5.5.0):
+    - GoogleUtilities/Environment
+  - IQKeyboardManagerSwift (6.2.0)
+  - leveldb-library (1.20)
+  - PinLayout (1.8.7)
+  - Realm (3.13.1):
+    - Realm/Headers (= 3.13.1)
+  - Realm/Headers (3.13.1)
+  - RealmSwift (3.13.1):
+    - Realm (= 3.13.1)
+  - SDWebImage (4.4.6):
+    - SDWebImage/Core (= 4.4.6)
+  - SDWebImage/Core (4.4.6)
+  - SwiftyJSON (4.2.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - Firebase/Database
+  - IQKeyboardManagerSwift
+  - PinLayout
+  - RealmSwift
+  - SDWebImage (~> 4.0)
+  - SwiftyJSON (~> 4.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Firebase
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseDatabase
+    - GoogleUtilities
+    - IQKeyboardManagerSwift
+    - leveldb-library
+    - PinLayout
+    - Realm
+    - RealmSwift
+    - SDWebImage
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  Firebase: 02f3281965c075426141a0ce1277e9de6649cab9
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: 52f851b30e11360f1e67cf04b1edfebf0a47a2d3
+  FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
+  GoogleUtilities: 6481e6318c5fcabaaa8513ef8120f329055d7c10
+  IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
+  leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  PinLayout: a0722a5c8f0e0168a9c091ffe4930dabf0c8582c
+  Realm: 50071da38fe079e0735e47c9f2eae738c68c5996
+  RealmSwift: 8a1e6a02b7a08cd17a31e3115143fb69fe5f3fb9
+  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+
+PODFILE CHECKSUM: 3258bb0c260b1df2c9b4a47a9d96ad898f208aed
+
+COCOAPODS: 1.5.3
