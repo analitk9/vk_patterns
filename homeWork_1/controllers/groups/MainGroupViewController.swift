@@ -16,7 +16,6 @@ class MainGroupViewController: UIViewController {
     private var currentSegment = 0
     
     private lazy var myGroupsViewController: GroupsViewController = {
-//        let vc = GroupsViewController()
         let vc = storyboard!.instantiateViewController(withIdentifier: "MyGroups")
         self.add(childViewController: vc)
         return vc as! GroupsViewController
@@ -51,8 +50,8 @@ class MainGroupViewController: UIViewController {
         segmentedControl.backgroundColor = UIColor.vkColor.main
         segmentedControl.tintColor = .clear
         
-        let fontNormal = UIFont(name: "HelveticaNeue", size: 17) ?? UIFont()
-        let fontSelect = UIFont(name: "HelveticaNeue-Medium", size: 17) ?? UIFont()
+        let fontNormal = UIFont.vkFont.normalFont  ?? UIFont()
+        let fontSelect = UIFont.vkFont.selectedFont ?? UIFont()
     
         segmentedControl.setTitleTextAttributes([
             NSAttributedString.Key.font: fontNormal,
