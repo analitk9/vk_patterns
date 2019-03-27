@@ -8,12 +8,12 @@
 
 import Foundation
 
-final class AlamofireAdapter {
+
+final class AlamofireAdapter: AlamofireProxyProtocol {
    
     private var friendsWrappers: [AlamofireDelegateFriendsWrapper] = []
     private var feedsWrappers:   [AlamofireDelegateFeedsWrapper]   = []
     private var groupsWrapper:   [AlamofireDelegateGroupsWrapper]  = []
-    
     private let alamofireInstance =  AlamofireService.instance
     
     func getFriends(completion: @escaping ([VkFriend]) -> Void){

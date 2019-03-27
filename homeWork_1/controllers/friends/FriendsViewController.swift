@@ -35,7 +35,7 @@ class FriendsViewController: UIViewController {
     private var friends: Results<VkFriend>?
     private var notificationTokenGroups: NotificationToken?
     
-    private let adapter = AlamofireAdapter()
+    private let proxy = AlamofireAdapterProxy() //AlamofireAdapter()
     
 
     override func viewDidLoad() {
@@ -120,7 +120,7 @@ extension FriendsViewController {
             }
         }
        // AlamofireService.instance.getFriends(delegate: self)
-        adapter.getFriends { (friends) in
+        proxy.getFriends { (friends) in
            
         }
         
@@ -220,13 +220,12 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
 extension FriendsViewController: FriendsViewControllerDelegate {
     
     func selectTitle(title: String) {
-        for (index, char) in GlobalConstants.titles.enumerated() {
-            if char == title {
+        for (index, char) in GlobalConstants.titles.enumerated() where char == title {
                 print ("Select section \(index)")
                 let indexPath = IndexPath(row: NSNotFound, section: index)
                 tableView.scrollToRow(at: indexPath, at: .top, animated: false)
                 break
-            }
+            
         }
     }
     

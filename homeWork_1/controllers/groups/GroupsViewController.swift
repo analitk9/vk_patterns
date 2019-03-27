@@ -27,7 +27,7 @@ class GroupsViewController: UIViewController {
     
     var selectedRow = -1
     
-    let adapter = AlamofireAdapter()
+    let proxy = AlamofireAdapterProxy() //AlamofireAdapter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -185,7 +185,7 @@ extension GroupsViewController {
     
     private func getMyGroups() {
        // AlamofireService.instance.getGroups(delegate: self)
-        adapter.returnGroups { _ in
+        proxy.returnGroups { _ in
         }
     }
     
@@ -197,16 +197,14 @@ extension GroupsViewController {
     
     private func leaveGroup(by gid: Int) {
        // AlamofireService.instance.leaveGroup(gid: gid, delegate: self)
-        adapter.leaveGroup(gid: gid) { [weak self] (gid) in
+        proxy.leaveGroup(gid: gid) { [weak self] (gid) in
             guard let self = self else { return }
             if let groups = self.groups {
-                for  group in groups {
-                    if group.gid == gid {
+                for  group in groups where group.gid == gid {
                         FirebaseService.instance.removeGroup(group: group)
                         RealmWorker.instance.removeItem(group)
                         self.tableView.reloadData()
                         break
-                    }
                 }
             }
         }
@@ -227,16 +225,13 @@ extension GroupsViewController: VkApiGroupsDelegate {
     
     func returnLeave(_ gid: Int) {
         if let groups = groups {
-            for  group in groups {
-                if group.gid == gid {
+            for  group in groups where group.gid == gid {
                     FirebaseService.instance.removeGroup(group: group)
                     RealmWorker.instance.removeItem(group)
                     tableView.reloadData()
                     break
-                }
             }
         }
-
     }
 
     private func deleteGroup(gid: Int, index: Int) {
