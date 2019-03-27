@@ -24,6 +24,10 @@ class NewsViewController: UIViewController {
     private var needClearNews = true
     private var isLoad = false
     
+    let proxy = AlamofireAdapterProxy() //AlamofireAdapter()
+    var newsCellFactory = NewsCellFactory()
+    var newsCellViewModels: [NewsCellViewModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setObserver()
@@ -53,7 +57,21 @@ class NewsViewController: UIViewController {
     private func prepareGetFeeds(needClearNews: Bool) {
         isLoad = true
         self.needClearNews = needClearNews
-        AlamofireService.instance.getNews(startFrom: needClearNews ? "":startFrom, delegate: self)
+       // AlamofireService.instance.getNews(startFrom: needClearNews ? "":startFrom, delegate: self)
+        let startPosition = needClearNews ? "" : startFrom
+        proxy.returnFeeds(startFrom: startPosition) { [weak self] (feeds) in
+            guard let self = self else { return }
+            self.refreshControl.endRefreshing()
+            self.isLoad = false
+            if needClearNews {
+                self.feeds.removeAll()
+                self.tableView.reloadData()
+            }
+            self.feeds.append(contentsOf: feeds)
+            self.newsCellViewModels = self.newsCellFactory.constructViewModels(from: feeds)
+            self.tableView.reloadData()
+        }
+        
     }
     
     
@@ -97,9 +115,44 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
-        cell.configure(feed: feeds[indexPath.row])
+       cell.configure(feed: feeds[indexPath.row])
+       // configure(cell: cell, feed: newsCellViewModels[indexPath.row])
+       
         cell.delegate = self
         return cell
+    }
+    
+    func configure(cell: NewsTableViewCell, feed: NewsCellViewModel) {
+        
+       cell.labelDate.text = feed.dateText
+        cell.labelFeedGroupHeader.text = feed.sourceName
+        
+        if feed.feedText.count == 0 {
+            cell.labelText.pin.height(0)
+        } else {
+            cell.labelText.pin.height(70)
+        }
+        
+        cell.labelText.text = feed.feedText
+        cell.labelLike.text = feed.likesCount
+        cell.labelViews.text = feed.viewsCount
+        cell.labelShare.text = feed.shareCount
+        cell.labelComment.text = feed.commentCount
+        
+        cell.imageViewGroup = feed.imageViewGroup
+        if feed.attachCount > 0 {
+            let height = cell.frame.width * CGFloat(feed.attachWidth) / CGFloat(feed.attachWidth)
+            
+            cell.imageNew.pin.height(height)
+            
+            cell.imageNew = feed.newsImage
+            
+        } else {
+            cell.imageNew.pin.height(0)
+        }
+        
+        cell.setNeedsLayout()
+        cell.layoutIfNeeded()
     }
     
     
@@ -135,47 +188,47 @@ extension NewsViewController: NewsTableViewCellDelegate {
     
 }
 
-extension NewsViewController: VkApiFeedsDelegate {
-    
-    func returnFeeds(_ feeds: [VkFeed]) {
-//        DispatchQueue.main.async {
-//            self.refreshControl.endRefreshing()
-//            self.isLoad = false
-//            if self.needClearNews {
-//                self.feeds.removeAll()
-//                self.tableView.reloadData()
-//            }
-//            self.feeds.append(contentsOf: feeds)
-//            self.tableView.reloadData()
+//extension NewsViewController: VkApiFeedsDelegate {
+//
+//    func returnFeeds(_ feeds: [VkFeed]) {
+////        DispatchQueue.main.async {
+////            self.refreshControl.endRefreshing()
+////            self.isLoad = false
+////            if self.needClearNews {
+////                self.feeds.removeAll()
+////                self.tableView.reloadData()
+////            }
+////            self.feeds.append(contentsOf: feeds)
+////            self.tableView.reloadData()
+////        }
+//        self.refreshControl.endRefreshing()
+//        isLoad = false
+//        if needClearNews {
+//            self.feeds.removeAll()
+//            tableView.reloadData()
 //        }
-        self.refreshControl.endRefreshing()
-        isLoad = false
-        if needClearNews {
-            self.feeds.removeAll()
-            tableView.reloadData()
-        }
-        self.feeds.append(contentsOf: feeds)
-        tableView.reloadData()
-        //        self.addNewCells(array: feeds)
+//        self.feeds.append(contentsOf: feeds)
+//        tableView.reloadData()
+//        //        self.addNewCells(array: feeds)
+//
+//    }
 
-    }
     
-    
-    private func addNewCells(array: [VkFeed]) {
-        if (array.count > 0) {
-            tableView.beginUpdates()
-            var indexPaths = [NSIndexPath]()
-            for row in (feeds.count..<(feeds.count + array.count)) {
-                indexPaths.append(NSIndexPath(row: row, section: 0))
-            }
-            feeds.append(contentsOf: array)
-            
-            tableView.insertRows(at: indexPaths as [IndexPath], with: .automatic)
-            tableView.endUpdates()
-        }
-    }
-    
-}
+//    private func addNewCells(array: [VkFeed]) {
+//        if (array.count > 0) {
+//            tableView.beginUpdates()
+//            var indexPaths = [NSIndexPath]()
+//            for row in (feeds.count..<(feeds.count + array.count)) {
+//                indexPaths.append(NSIndexPath(row: row, section: 0))
+//            }
+//            feeds.append(contentsOf: array)
+//            
+//            tableView.insertRows(at: indexPaths as [IndexPath], with: .automatic)
+//            tableView.endUpdates()
+//        }
+//    }
+//    
+//}
 
 
 

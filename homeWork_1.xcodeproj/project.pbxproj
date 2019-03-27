@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		5DC3809695F037A6B111CF13 /* Pods_homeWork_1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB03EE607AE3B19FD932EA7A /* Pods_homeWork_1.framework */; };
+		6409ACD7223D4BFF00A4EEED /* AlamofireDelegateFriendsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409ACD6223D4BFF00A4EEED /* AlamofireDelegateFriendsWrapper.swift */; };
+		6409ACD9223D504000A4EEED /* AlamofireAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409ACD8223D504000A4EEED /* AlamofireAdapter.swift */; };
+		6409ACDC223E4EE400A4EEED /* AlamofireDelegateFeedsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409ACDB223E4EE400A4EEED /* AlamofireDelegateFeedsWrapper.swift */; };
+		6409ACDE223E561600A4EEED /* AlamofireDelegateGroupsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409ACDD223E561600A4EEED /* AlamofireDelegateGroupsWrapper.swift */; };
+		6409ACE1223FC74300A4EEED /* NewsCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409ACE0223FC74300A4EEED /* NewsCellFactory.swift */; };
+		6409ACE4223FC7C200A4EEED /* NewsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409ACE3223FC7C200A4EEED /* NewsCellViewModel.swift */; };
+		647466D1224BBC8E00C6B7DE /* AlamofireAdapterProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647466D0224BBC8E00C6B7DE /* AlamofireAdapterProxy.swift */; };
 		840110E021EC364C0044AEB7 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840110DF21EC364C0044AEB7 /* TestViewController.swift */; };
 		84105FB3217F173D00EEF673 /* VKApiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84105FB2217F173D00EEF673 /* VKApiViewController.swift */; };
 		8415662D21B7916500AF9803 /* SearchGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415662C21B7916500AF9803 /* SearchGroupViewController.swift */; };
@@ -63,6 +70,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6409ACD6223D4BFF00A4EEED /* AlamofireDelegateFriendsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireDelegateFriendsWrapper.swift; sourceTree = "<group>"; };
+		6409ACD8223D504000A4EEED /* AlamofireAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireAdapter.swift; sourceTree = "<group>"; };
+		6409ACDB223E4EE400A4EEED /* AlamofireDelegateFeedsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireDelegateFeedsWrapper.swift; sourceTree = "<group>"; };
+		6409ACDD223E561600A4EEED /* AlamofireDelegateGroupsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireDelegateGroupsWrapper.swift; sourceTree = "<group>"; };
+		6409ACE0223FC74300A4EEED /* NewsCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellFactory.swift; sourceTree = "<group>"; };
+		6409ACE3223FC7C200A4EEED /* NewsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellViewModel.swift; sourceTree = "<group>"; };
+		647466D0224BBC8E00C6B7DE /* AlamofireAdapterProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireAdapterProxy.swift; sourceTree = "<group>"; };
 		840110DF21EC364C0044AEB7 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		84105FB2217F173D00EEF673 /* VKApiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKApiViewController.swift; sourceTree = "<group>"; };
 		8415662C21B7916500AF9803 /* SearchGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGroupViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +154,32 @@
 				FB03EE607AE3B19FD932EA7A /* Pods_homeWork_1.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6409ACDA223E46BF00A4EEED /* AlamofireDelegateWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				6409ACD6223D4BFF00A4EEED /* AlamofireDelegateFriendsWrapper.swift */,
+				6409ACDB223E4EE400A4EEED /* AlamofireDelegateFeedsWrapper.swift */,
+				6409ACDD223E561600A4EEED /* AlamofireDelegateGroupsWrapper.swift */,
+			);
+			path = AlamofireDelegateWrappers;
+			sourceTree = "<group>";
+		};
+		6409ACDF223FC6A900A4EEED /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				6409ACE0223FC74300A4EEED /* NewsCellFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		6409ACE2223FC7A000A4EEED /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6409ACE3223FC7C200A4EEED /* NewsCellViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		840110DE21EC36150044AEB7 /* test */ = {
@@ -228,6 +268,10 @@
 		84D1DEB821AD5F16006FC20E /* service */ = {
 			isa = PBXGroup;
 			children = (
+				647466D0224BBC8E00C6B7DE /* AlamofireAdapterProxy.swift */,
+				6409ACDF223FC6A900A4EEED /* Factory */,
+				6409ACDA223E46BF00A4EEED /* AlamofireDelegateWrappers */,
+				6409ACD8223D504000A4EEED /* AlamofireAdapter.swift */,
 				8442ABA8219132B7003DDA6A /* AlamofireService.swift */,
 				8442ABAA2192EC0D003DDA6A /* VkResponseParser.swift */,
 				8442ABAF21957D2D003DDA6A /* RealmWorker.swift */,
@@ -345,6 +389,7 @@
 		AA5766E42160AD630029F786 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				6409ACE2223FC7A000A4EEED /* ViewModel */,
 				841C867D2186B8100016CEC8 /* vk */,
 				AA5766E52160AD8C0029F786 /* Friend.swift */,
 				AA5766EF2160D82B0029F786 /* FriendList.swift */,
@@ -547,17 +592,22 @@
 			files = (
 				AA5766F22160DBA70029F786 /* FriendHeaderTableViewCell.swift in Sources */,
 				AA5766EE2160CB9C0029F786 /* FriendCollectionViewCell.swift in Sources */,
+				6409ACD9223D504000A4EEED /* AlamofireAdapter.swift in Sources */,
 				842A0408216DB83F00FAFF92 /* CustomSearchBar.swift in Sources */,
+				6409ACDE223E561600A4EEED /* AlamofireDelegateGroupsWrapper.swift in Sources */,
 				8442ABAB2192EC0E003DDA6A /* VkResponseParser.swift in Sources */,
 				AA3D1EB121B25109000ED1C1 /* FirebaseService.swift in Sources */,
 				842A03E0216C860000FAFF92 /* CustomIndicator.swift in Sources */,
 				8415662D21B7916500AF9803 /* SearchGroupViewController.swift in Sources */,
 				84D1DEC021AE8AB9006FC20E /* VkCommentProfile.swift in Sources */,
+				6409ACD7223D4BFF00A4EEED /* AlamofireDelegateFriendsWrapper.swift in Sources */,
 				84A74D8321EDC12900AE5A76 /* NewsTableViewCell.swift in Sources */,
 				844ACE352186BFC500565895 /* VkFriend.swift in Sources */,
 				8415662F21B7918C00AF9803 /* MainGroupViewController.swift in Sources */,
 				8442AB9721870B13003DDA6A /* VkPhoto.swift in Sources */,
+				6409ACE4223FC7C200A4EEED /* NewsCellViewModel.swift in Sources */,
 				84C1209B2161C6ED0044CBEB /* MyGroupCell.swift in Sources */,
+				6409ACDC223E4EE400A4EEED /* AlamofireDelegateFeedsWrapper.swift in Sources */,
 				AA5766D92160A72F0029F786 /* LoginViewController.swift in Sources */,
 				8424E54D217485B400188E61 /* CustomSquareIndicator.swift in Sources */,
 				AA5766FF2160F2CD0029F786 /* New.swift in Sources */,
@@ -573,11 +623,13 @@
 				AA5766EC2160B5A10029F786 /* FriendInfoViewController.swift in Sources */,
 				840110E021EC364C0044AEB7 /* TestViewController.swift in Sources */,
 				8424E560217845B700188E61 /* CustomInteractiveTransition.swift in Sources */,
+				647466D1224BBC8E00C6B7DE /* AlamofireAdapterProxy.swift in Sources */,
 				AA5766E12160AC5B0029F786 /* FriendsViewController.swift in Sources */,
 				AA5766E62160AD8C0029F786 /* Friend.swift in Sources */,
 				84D1DEC521AE926B006FC20E /* CommentTableViewCell.swift in Sources */,
 				84D1DEBE21AE745D006FC20E /* NewsInfoTableViewCell.swift in Sources */,
 				84105FB3217F173D00EEF673 /* VKApiViewController.swift in Sources */,
+				6409ACE1223FC74300A4EEED /* NewsCellFactory.swift in Sources */,
 				844ACE372186D98900565895 /* VkGroup.swift in Sources */,
 				AA5766F72160E9080029F786 /* CustomLike.swift in Sources */,
 				AA5766EA2160AE950029F786 /* FriendTableViewCell.swift in Sources */,

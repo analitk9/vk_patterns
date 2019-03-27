@@ -49,6 +49,8 @@ class NewsTableViewCell: UITableViewCell {
     
     var operation: SDWebImageOperation!
     
+
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -126,7 +128,6 @@ class NewsTableViewCell: UITableViewCell {
         labelComment.text = feed.getStringFrom(count: feed.countComments)
         
         imageViewGroup.sd_setImage(with: URL(string: feed.sourceUrl), placeholderImage: UIImage(named: "noPhoto"))
-        
         if feed.attachments.count > 0 {
             
             let height = self.frame.width * CGFloat(feed.attachments[0].height) / CGFloat(feed.attachments[0].width)
@@ -239,7 +240,9 @@ extension NewsTableViewCell {
                 self.imageNew.image = blur
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                UIView.transition(with: self.imageNew, duration: 0.2, options: .transitionCrossDissolve, animations: { self.imageNew.image = origin }, completion: nil)
+                UIView.transition(with: self.imageNew, duration: 0.2,
+                                  options: .transitionCrossDissolve,
+                                  animations: { self.imageNew.image = origin }, completion: nil)
             }
         }
     }

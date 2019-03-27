@@ -35,6 +35,8 @@ class FriendsViewController: UIViewController {
     private var friends: Results<VkFriend>?
     private var notificationTokenGroups: NotificationToken?
     
+    private let proxy = AlamofireAdapterProxy() //AlamofireAdapter()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,11 +106,7 @@ extension FriendsViewController {
     //MARK: - Network funcs
     private func getFriends() {
     
-//        let sortProperties = [SortDescriptor(keyPath: "first_name", ascending: true), SortDescriptor(keyPath: "last_name", ascending: true)]
         friends = RealmWorker.instance.getItems(VkFriend.self)?.sorted(byKeyPath: "first_name").sorted(byKeyPath: "last_name")
-        //sorted(by: { (first, second) -> Bool in
-//        return (first.first_name < second.first_name && first.last_name < second.last_name)
-//    })
         notificationTokenGroups = friends?.observe { changes in
             print("friendObserver is work")
             switch changes {
@@ -121,7 +119,11 @@ extension FriendsViewController {
                 print(error.localizedDescription)
             }
         }
-        AlamofireService.instance.getFriends(delegate: self)
+       // AlamofireService.instance.getFriends(delegate: self)
+        proxy.getFriends { (friends) in
+           
+        }
+        
     }
     
     private func migrateFriends() {
@@ -185,7 +187,6 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         customControll.isHidden = searchActive
-//        return groupedFriends.count
         return searchActive ? filteredGroupedFriends.count : groupedFriends.count
     }
     
@@ -219,13 +220,12 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
 extension FriendsViewController: FriendsViewControllerDelegate {
     
     func selectTitle(title: String) {
-        for (index, char) in GlobalConstants.titles.enumerated() {
-            if char == title {
+        for (index, char) in GlobalConstants.titles.enumerated() where char == title {
                 print ("Select section \(index)")
                 let indexPath = IndexPath(row: NSNotFound, section: index)
                 tableView.scrollToRow(at: indexPath, at: .top, animated: false)
                 break
-            }
+            
         }
     }
     

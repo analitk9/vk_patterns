@@ -27,6 +27,8 @@ class GroupsViewController: UIViewController {
     
     var selectedRow = -1
     
+    let proxy = AlamofireAdapterProxy() //AlamofireAdapter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.navigationItem.title = "Группы"
@@ -182,42 +184,31 @@ extension GroupsViewController: UITableViewDelegate, UITableViewDataSource {
 extension GroupsViewController {
     
     private func getMyGroups() {
-        AlamofireService.instance.getGroups(delegate: self)
+       // AlamofireService.instance.getGroups(delegate: self)
+        proxy.returnGroups { _ in
+        }
     }
     
     private func getGroups(by search: String) {
         filteredGroups = RealmWorker.instance.getItems(VkGroup.self)?.filter("name contains[c] '\(search)'").sorted(byKeyPath: "name")
         tableView.reloadData()
 
-//        notificationTokenSearchGroups = self.filteredGroups?.observe { changes in
-//            print("groupObserver is work")
-//            switch changes {
-//            case .initial(_):
-//                break
-//            case .update(let collection, let deletions, let insertions, let modifications):
-//                if self.searchActive {
-////                    self.tableView.beginUpdates()
-////                    if deletions.count > 0 {
-////                    self.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-////                    }
-////                    if modifications.count > 0 {
-////                        self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-////                    }
-////                    if insertions.count > 0 {
-////                        self.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-////                    }
-////                    self.tableView.endUpdates()
-//                    self.tableView.reloadData()
-//                }
-//            case .error(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-//        tableView.reloadData()
     }
     
     private func leaveGroup(by gid: Int) {
-        AlamofireService.instance.leaveGroup(gid: gid, delegate: self)
+       // AlamofireService.instance.leaveGroup(gid: gid, delegate: self)
+        proxy.leaveGroup(gid: gid) { [weak self] (gid) in
+            guard let self = self else { return }
+            if let groups = self.groups {
+                for  group in groups where group.gid == gid {
+                        FirebaseService.instance.removeGroup(group: group)
+                        RealmWorker.instance.removeItem(group)
+                        self.tableView.reloadData()
+                        break
+                }
+            }
+        }
+        
     }
     
     private func joinGroup(by gid: Int) {
@@ -230,30 +221,26 @@ extension GroupsViewController: VkApiGroupsDelegate {
     func returnJoin(_ gid: Int) {}
     func returnJoin(_ error: String) {}
     func returnLeave(_ error: String) {}
+    func returnGroups(_ groups: [VkGroup]) {}
     
     func returnLeave(_ gid: Int) {
         if let groups = groups {
-            for  group in groups {
-                if group.gid == gid {
+            for  group in groups where group.gid == gid {
                     FirebaseService.instance.removeGroup(group: group)
                     RealmWorker.instance.removeItem(group)
                     tableView.reloadData()
                     break
-                }
             }
         }
-//        tableView.reloadData()
-
     }
-    
-    
+
     private func deleteGroup(gid: Int, index: Int) {
         let indexPath = IndexPath(item: index, section: 0)
         tableView.deleteRows(at: [indexPath], with: .top)
     }
     
     
-    func returnGroups(_ groups: [VkGroup]) {}
+   
     
 }
 
